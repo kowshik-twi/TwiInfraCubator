@@ -1,0 +1,73 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red64\green11\blue217;}
+{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c32309\c18666\c88229;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww34360\viewh18760\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 \
+kowshik@Kowshiks-MacBook-Pro TwiInfraCubator % cd Assignment2 \
+\
+kowshik@Kowshiks-MacBook-Pro Assignment2 % mv Dockerfile go-app    \
+kowshik@Kowshiks-MacBook-Pro Assignment2 % docker build -t go-app-img go-app/\
+[+] Building 7.1s (9/9) FINISHED                                                    docker:default\
+\cf3  => [internal] load build definition from Dockerfile                                          0.0s\cf2 \
+\cf3  => => transferring dockerfile: 163B                                                          0.0s\cf2 \
+\cf3  => [internal] load .dockerignore                                                             0.0s\cf2 \
+\cf3  => => transferring context: 2B                                                               0.0s\cf2 \
+\cf3  => [internal] load metadata for docker.io/library/golang:latest                              0.0s\cf2 \
+\cf3  => [1/4] FROM docker.io/library/golang:latest                                                0.0s\cf2 \
+\cf3  => [internal] load build context                                                             0.1s\cf2 \
+\cf3  => => transferring context: 7.65MB                                                           0.0s\cf2 \
+\cf3  => CACHED [2/4] WORKDIR /app                                                                 0.0s\cf2 \
+\cf3  => [3/4] COPY . .                                                                            0.0s\cf2 \
+\cf3  => [4/4] RUN go build -o go-app .                                                            6.9s\cf2 \
+\cf3  => exporting to image                                                                        0.1s\cf2 \
+\cf3  => => exporting layers                                                                       0.1s\cf2 \
+\cf3  => => writing image sha256:5bee7daa4dac4ab16a96127ac19b272c6517def7db52e3aae41be38334f63d98  0.0s\cf2 \
+\cf3  => => naming to docker.io/library/go-app-img                                                 0.0s\cf2 \
+\
+kowshik@Kowshiks-MacBook-Pro Assignment2 % docker run -d -p 8080:8080 --name go-app go-app-img   \
+4d8a686eba0a129a3f47ff9a7f4f59c251b9d2b62a2cb45ba7cd50c22926b831\
+kowshik@Kowshiks-MacBook-Pro Assignment2 % curl http://localhost:8080/\
+hello\
+kowshik@Kowshiks-MacBook-Pro Assignment2 % docker tag go-app-img kowshiktwi/go-app-img:v1\
+kowshik@Kowshiks-MacBook-Pro Assignment2 % docker history go-app-img:v1\
+\
+kowshik@Kowshiks-MacBook-Pro Assignment2 % docker history kowshiktwi/go-app-img:v1\
+IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT\
+5bee7daa4dac   5 minutes ago    CMD ["./go-app"]                                0B        buildkit.dockerfile.v0\
+<missing>      5 minutes ago    EXPOSE map[8080/tcp:\{\}]                         0B        buildkit.dockerfile.v0\
+<missing>      5 minutes ago    RUN /bin/sh -c go build -o go-app . # buildk\'85   67.5MB    buildkit.dockerfile.v0\
+<missing>      6 minutes ago    COPY . . # buildkit                             7.64MB    buildkit.dockerfile.v0\
+<missing>      28 minutes ago   WORKDIR /app                                    0B        buildkit.dockerfile.v0\
+<missing>      2 days ago       /bin/sh -c #(nop) WORKDIR /go                   0B        \
+<missing>      2 days ago       /bin/sh -c mkdir -p "$GOPATH/src" "$GOPATH/b\'85   0B        \
+<missing>      2 days ago       /bin/sh -c #(nop)  ENV PATH=/go/bin:/usr/loc\'85   0B        \
+<missing>      2 days ago       /bin/sh -c #(nop)  ENV GOPATH=/go               0B        \
+<missing>      2 days ago       /bin/sh -c set -eux;  arch="$(dpkg --print-a\'85   241MB     \
+<missing>      2 days ago       /bin/sh -c #(nop)  ENV GOLANG_VERSION=1.20.6    0B        \
+<missing>      2 days ago       /bin/sh -c #(nop)  ENV PATH=/usr/local/go/bi\'85   0B        \
+<missing>      2 days ago       /bin/sh -c set -eux;  apt-get update;  apt-g\'85   240MB     \
+<missing>      2 days ago       /bin/sh -c apt-get update && apt-get install\'85   183MB     \
+<missing>      2 days ago       /bin/sh -c set -eux;  apt-get update;  apt-g\'85   48.5MB    \
+<missing>      2 days ago       /bin/sh -c #(nop)  CMD ["bash"]                 0B        \
+<missing>      2 days ago       /bin/sh -c #(nop) ADD file:fa545fc37115e8741\'85   139MB     \
+kowshik@Kowshiks-MacBook-Pro Assignment2 % docker login\
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.\
+Username: kowshiktwi\
+Password: \
+Login Succeeded\
+kowshik@Kowshiks-MacBook-Pro Assignment2 % docker push kowshiktwi/go-app-img:v1\
+The push refers to repository [docker.io/kowshiktwi/go-app-img]\
+2fb574ac5e42: Layer already exists \
+e75fdf301856: Layer already exists \
+15e081fd2d8c: Layer already exists \
+735154a12616: Layer already exists \
+959cb25b9021: Layer already exists \
+af2e9ca25090: Layer already exists \
+099287c4a608: Layer already exists \
+43b21807e78f: Layer already exists \
+cb3bf648496b: Layer already exists \
+v1: digest: sha256:1123552af2caeac1fc5bcb8a031fe7e664c7eeff3f00aac684fef502fbc5f04f size: 2213\
+kowshik@Kowshiks-MacBook-Pro Assignment2 % }
