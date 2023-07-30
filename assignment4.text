@@ -1,0 +1,21 @@
+kowshik@Kowshiks-MacBook-Pro ~ % docker volume create  my-volume
+my-volume
+kowshik@Kowshiks-MacBook-Pro ~ % docker run -d --name my-container -v my-volume:/app alpine tail -f /dev/null
+
+Unable to find image 'alpine:latest' locally
+latest: Pulling from library/alpine
+8c6d1654570f: Already exists 
+Digest: sha256:82d1e9d7ed48a7523bdebc18cf6290bdb97b82302a8a9c27d4fe885949ea94d1
+Status: Downloaded newer image for alpine:latest
+01467283dca85d26222a14baf081b12eae8878fec1e74c3d50dee0fce91702b0
+kowshik@Kowshiks-MacBook-Pro ~ % docker exec -it my-container sh -c "echo 'Hello, this is a test file.' > /app/test.txt"
+
+kowshik@Kowshiks-MacBook-Pro ~ % docker exec -it my-container cat /app/test.txt
+
+Hello, this is a test file.
+kowshik@Kowshiks-MacBook-Pro ~ % docker run -d --name my-container-2 -v my-volume:/app alpine tail -f /dev/null
+
+ba904a5108875449ededc360382f953fe79f663fa8ce568dfb9302d0bcb00bc5
+kowshik@Kowshiks-MacBook-Pro ~ % docker exec -it my-container-2 cat /app/test.txt
+
+Hello, this is a test file.
