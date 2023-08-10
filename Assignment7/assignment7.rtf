@@ -1,0 +1,44 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red64\green11\blue217;\red47\green180\blue29;
+\red255\green255\blue255;}
+{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c32309\c18666\c88229;\cssrgb\c20241\c73898\c14950;
+\csgray\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 kowshik@Kowshiks-MacBook-Pro Assignment7 % docker-compose -f docker-compose.yml up -d\
+[+] Building 0.0s (14/14) FINISHED                                              \
+\cf3  => [go-app internal] load build definition from Dockerfile.redis          0.0s\cf2 \
+\cf3  => => transferring dockerfile: 447B                                       0.0s\cf2 \
+\cf3  => [go-app internal] load .dockerignore                                   0.0s\cf2 \
+\cf3  => => transferring context: 2B                                            0.0s\cf2 \
+\cf3  => [go-app internal] load metadata for docker.io/library/golang:alpine    0.0s\cf2 \
+\cf3  => [go-app internal] load metadata for docker.io/library/alpine:latest    0.0s\cf2 \
+\cf3  => [go-app build-stage 1/6] FROM docker.io/library/golang:alpine          0.0s\cf2 \
+\cf3  => [go-app internal] load build context                                   0.0s\cf2 \
+\cf3  => => transferring context: 1.84kB                                        0.0s\cf2 \
+\cf3  => [go-app stage-1 1/2] FROM docker.io/library/alpine:latest              0.0s\cf2 \
+\cf3  => CACHED [go-app build-stage 2/6] WORKDIR /src/app                       0.0s\cf2 \
+\cf3  => CACHED [go-app build-stage 3/6] COPY ./go-app/go.mod /src/app          0.0s\cf2 \
+\cf3  => CACHED [go-app build-stage 4/6] COPY ./go-app/main.go /src/app         0.0s\cf2 \
+\cf3  => CACHED [go-app build-stage 5/6] RUN go mod tidy                        0.0s\cf2 \
+\cf3  => CACHED [go-app build-stage 6/6] RUN CGO_ENABLED=0 GOOS=linux GOARCH=a  0.0s\cf2 \
+\cf3  => CACHED [go-app stage-1 2/2] COPY --from=build-stage /src/app/out/app   0.0s\cf2 \
+\cf3  => [go-app] exporting to image                                            0.0s\cf2 \
+\cf3  => => exporting layers                                                    0.0s\cf2 \
+\cf3  => => writing image sha256:f2eabae22c0f0425e5bfe9a42c9c83c55b27a00d7dc17  0.0s\cf2 \
+\cf3  => => naming to docker.io/library/assignment7-go-app                      0.0s\cf2 \
+\cf3 [+] Running 3/3\cf2 \
+ \cf4 \uc0\u10004 \cf2  Network assignment7_my_network    \cf4 C...\cf2                                   \cf3 0.0s \cf2 \
+ \cf4 \uc0\u10004 \cf2  Container assignment7-redis-db-1  \cf4 Started\cf2                                \cf3 0.4s \cf2 \
+ \cf4 \uc0\u10004 \cf2  Container assignment7-go-app-1    \cf4 S...\cf2                                   \cf3 0.7s \cf2 \
+kowshik@Kowshiks-MacBook-Pro Assignment7 % curl http://localhost:8080/vote\
+total votes  1 
+\f1\b \cf5 \cb2 %
+\f0\b0 \cf2 \cb1                                                                 kowshik@Kowshiks-MacBook-Pro Assignment7 % docker-compose down\
+\cf3 [+] Running 3/3\cf2 \
+ \cf4 \uc0\u10004 \cf2  Container assignment7-go-app-1    \cf4 R...\cf2                                   \cf3 0.2s \cf2 \
+ \cf4 \uc0\u10004 \cf2  Container assignment7-redis-db-1  \cf4 Removed\cf2                                \cf3 0.3s \cf2 \
+ \cf4 \uc0\u10004 \cf2  Network assignment7_my_network    \cf4 R...\cf2                                   \cf3 0.1s \cf2 \
+kowshik@Kowshiks-MacBook-Pro Assignment7 % }
